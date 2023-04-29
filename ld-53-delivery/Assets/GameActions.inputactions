@@ -1,0 +1,76 @@
+{
+    "name": "GameActions",
+    "maps": [
+        {
+            "name": "PlayerMovement",
+            "id": "0009a45c-987f-4c09-8608-8b35a6616ffd",
+            "actions": [
+                {
+                    "name": "LeftThrottle",
+                    "type": "Value",
+                    "id": "d30a9b77-9489-487e-b707-44446b5b282d",
+                    "expectedControlType": "Axis",
+                    "processors": "Normalize(max=1)",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightThrottle",
+                    "type": "Value",
+                    "id": "d51e53a1-d468-41be-8e48-3e19d789998a",
+                    "expectedControlType": "Axis",
+                    "processors": "Normalize(max=1)",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b99b68b5-065c-4784-b3fe-9d5c45c19b2c",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftThrottle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "766ec5a0-e75e-454e-a56a-0c24770e46a9",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftThrottle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1fd2aba-384d-47b6-970d-1fc24c051a51",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightThrottle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40b75a64-55c1-4d97-b110-5695a6413fc3",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightThrottle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
