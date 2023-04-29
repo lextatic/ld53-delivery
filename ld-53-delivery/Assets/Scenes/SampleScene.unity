@@ -834,10 +834,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 251281545}
     - target: {fileID: 6831387704960924984, guid: 2765c3989c1d237428714bda340a3682, type: 3}
-      propertyPath: Tables.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6831387704960924984, guid: 2765c3989c1d237428714bda340a3682, type: 3}
       propertyPath: Tables.Array.data[0]
       value: 
       objectReference: {fileID: 693582955}
@@ -2694,7 +2690,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:

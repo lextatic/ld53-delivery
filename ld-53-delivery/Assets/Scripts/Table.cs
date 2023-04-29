@@ -9,9 +9,13 @@ public class Table : MonoBehaviour
 
 	private bool _droneIsAtTable;
 	private DroneContainer _droneContainer;
+	private Collider2D _tableCollider;
 	private bool _hasActiveOrder;
+	private bool _hasPendingDishes;
+	private GameObject _dishesPrefab;
 
 	public event Action<Table> OnOrderDelivered;
+	public event Action<Table> OnDishesCollected;
 
 	public bool HasActiveOrder
 	{
@@ -19,41 +23,77 @@ public class Table : MonoBehaviour
 		{
 			_hasActiveOrder = value;
 			VisualIndicator.gameObject.SetActive(value);
+			_tableCollider.enabled = value;
 		}
 
 		get => _hasActiveOrder;
+	}
+
+	public bool HasPendingDishes
+	{
+		set
+		{
+			_hasPendingDishes = value;
+			VisualIndicator.gameObject.SetActive(value);
+			_tableCollider.enabled = value;
+		}
+
+		get => _hasPendingDishes;
 	}
 
 	private void Awake()
 	{
 		_droneIsAtTable = false;
 		_droneContainer = Drone.GetComponent<DroneContainer>();
+		_tableCollider = GetComponent<Collider2D>();
+		_tableCollider.enabled = false;
 	}
 
 	private void Update()
 	{
-		if (HasActiveOrder)
+		if (HasActiveOrder || HasPendingDishes)
 		{
 			UpdateIndicator();
 
-			if (_droneIsAtTable && Drone.IsSleeping() && _droneContainer.DeliverableList.Count != 0)
+			if (_droneIsAtTable && Drone.IsSleeping())
 			{
 				Debug.Log("At table!!");
 
-				HasActiveOrder = false;
-
-				var score = CalculateScore();
-
-				Debug.Log(score);
-
-				OnOrderDelivered.Invoke(this);
-
-				foreach (var item in _droneContainer.DeliverableList)
+				if (HasActiveOrder && _droneContainer.DeliverableList.Count != 0)
 				{
-					Destroy(item.gameObject);
+					HasActiveOrder = false;
+
+					var score = CalculateScore();
+
+					Debug.Log(score);
+
+					foreach (var item in _droneContainer.DeliverableList)
+					{
+						Destroy(item.gameObject);
+					}
+
+					_droneContainer.DeliverableList.Clear();
+
+					OnOrderDelivered.Invoke(this);
 				}
 
-				_droneContainer.DeliverableList.Clear();
+				if (HasPendingDishes && _droneContainer.DeliverableList.Count == 0)
+				{
+					HasPendingDishes = false;
+
+					var dishesPrefab = Instantiate(_dishesPrefab, Drone.transform.position, Quaternion.identity);
+
+					foreach (Transform child in dishesPrefab.transform)
+					{
+						_droneContainer.DeliverableList.Add(child.gameObject);
+					}
+
+					dishesPrefab.transform.DetachChildren();
+
+					Destroy(dishesPrefab);
+
+					OnDishesCollected.Invoke(this);
+				}
 			}
 		}
 	}
@@ -72,6 +112,12 @@ public class Table : MonoBehaviour
 		{
 			_droneIsAtTable = false;
 		}
+	}
+
+	public void NewDishes(GameObject dishesPrefab)
+	{
+		_dishesPrefab = dishesPrefab;
+		HasPendingDishes = true;
 	}
 
 	private int CalculateScore()
