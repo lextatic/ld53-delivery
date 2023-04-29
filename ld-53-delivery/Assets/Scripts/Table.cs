@@ -1,11 +1,16 @@
+using System;
 using UnityEngine;
 
 public class Table : MonoBehaviour
 {
+	public int TableID;
 	public Rigidbody2D Drone;
+	public bool HasActiveOrder;
 
 	private bool _droneIsAtTable;
 	private DroneContainer _droneContainer;
+
+	public event Action<Table> OnOrderDelivered;
 
 	private void Awake()
 	{
@@ -15,8 +20,18 @@ public class Table : MonoBehaviour
 
 	private void Update()
 	{
-		if (_droneIsAtTable && Drone.IsSleeping() && _droneContainer.DeliverableList.Count != 0)
+		if (HasActiveOrder && _droneIsAtTable && Drone.IsSleeping() && _droneContainer.DeliverableList.Count != 0)
 		{
+			Debug.Log("At table!!");
+
+			HasActiveOrder = false;
+
+			var score = CalculateScore();
+
+			Debug.Log(score);
+
+			OnOrderDelivered.Invoke(this);
+
 			foreach (var item in _droneContainer.DeliverableList)
 			{
 				Destroy(item.gameObject);
@@ -30,8 +45,6 @@ public class Table : MonoBehaviour
 	{
 		if (collision.gameObject == Drone.gameObject)
 		{
-			Debug.Log("On the table");
-
 			_droneIsAtTable = true;
 		}
 	}
@@ -40,9 +53,26 @@ public class Table : MonoBehaviour
 	{
 		if (collision.gameObject == Drone.gameObject)
 		{
-			Debug.Log("Off the able");
-
 			_droneIsAtTable = false;
 		}
+	}
+
+	private int CalculateScore()
+	{
+		int totalScore = 0;
+
+		foreach (var item in _droneContainer.DeliverableList)
+		{
+			if (Physics2D.Raycast(item.transform.position, Vector2.down, 5f, 1 << LayerMask.NameToLayer("Score")))
+			{
+				if (Vector3.Angle(item.transform.up, Vector3.up) <= 15f)
+				{
+					totalScore += item.GetComponent<DeliverableScore>().Score;
+				}
+			}
+		}
+
+
+		return totalScore;
 	}
 }

@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3575209606743429503, guid: a02aae097fe4a804d843b1dbae9094b7, type: 3}
+      propertyPath: Score
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3674708157174809434, guid: a02aae097fe4a804d843b1dbae9094b7, type: 3}
       propertyPath: m_Name
-      value: Plate (1)
+      value: Plate
       objectReference: {fileID: 0}
     - target: {fileID: 3674708157174809438, guid: a02aae097fe4a804d843b1dbae9094b7, type: 3}
       propertyPath: m_RootOrder

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3277784831913381931}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3277784832140437329}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3277784833215325910}
   - component: {fileID: 3277784833215325911}
   - component: {fileID: 8981576665805049145}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Drone
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -259,3 +259,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6155dd88279b7df43af1e4e8b4543787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeliverableList: []
