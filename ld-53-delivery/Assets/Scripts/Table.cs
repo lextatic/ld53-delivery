@@ -5,12 +5,24 @@ public class Table : MonoBehaviour
 {
 	public int TableID;
 	public Rigidbody2D Drone;
-	public bool HasActiveOrder;
+	public Transform VisualIndicator;
 
 	private bool _droneIsAtTable;
 	private DroneContainer _droneContainer;
+	private bool _hasActiveOrder;
 
 	public event Action<Table> OnOrderDelivered;
+
+	public bool HasActiveOrder
+	{
+		set
+		{
+			_hasActiveOrder = value;
+			VisualIndicator.gameObject.SetActive(value);
+		}
+
+		get => _hasActiveOrder;
+	}
 
 	private void Awake()
 	{
@@ -20,24 +32,29 @@ public class Table : MonoBehaviour
 
 	private void Update()
 	{
-		if (HasActiveOrder && _droneIsAtTable && Drone.IsSleeping() && _droneContainer.DeliverableList.Count != 0)
+		if (HasActiveOrder)
 		{
-			Debug.Log("At table!!");
+			UpdateIndicator();
 
-			HasActiveOrder = false;
-
-			var score = CalculateScore();
-
-			Debug.Log(score);
-
-			OnOrderDelivered.Invoke(this);
-
-			foreach (var item in _droneContainer.DeliverableList)
+			if (_droneIsAtTable && Drone.IsSleeping() && _droneContainer.DeliverableList.Count != 0)
 			{
-				Destroy(item.gameObject);
-			}
+				Debug.Log("At table!!");
 
-			_droneContainer.DeliverableList.Clear();
+				HasActiveOrder = false;
+
+				var score = CalculateScore();
+
+				Debug.Log(score);
+
+				OnOrderDelivered.Invoke(this);
+
+				foreach (var item in _droneContainer.DeliverableList)
+				{
+					Destroy(item.gameObject);
+				}
+
+				_droneContainer.DeliverableList.Clear();
+			}
 		}
 	}
 
@@ -72,7 +89,18 @@ public class Table : MonoBehaviour
 			}
 		}
 
-
 		return totalScore;
+	}
+
+	private void UpdateIndicator()
+	{
+		if (Vector3.Distance(Drone.transform.position, transform.position) > 20)
+		{
+			VisualIndicator.transform.position = Drone.transform.position + (transform.position - Drone.transform.position).normalized * 20;
+		}
+		else
+		{
+			VisualIndicator.transform.position = transform.position;
+		}
 	}
 }

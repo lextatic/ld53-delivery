@@ -56,9 +56,8 @@ public class KitchenCounter : MonoBehaviour
 	{
 		int table = Random.Range(0, Tables.Count);
 
-		//Tables[table].HasActiveOrder = true;
-		Tables[0].HasActiveOrder = true;
-		Tables[0].OnOrderDelivered += KitchenCounter_OnOrderDelivered;
+		Tables[table].HasActiveOrder = true;
+		Tables[table].OnOrderDelivered += KitchenCounter_OnOrderDelivered;
 		_hasActiveOrder = true;
 
 		var deliverablePrefab = Instantiate(DeliverablePrefab, Drone.transform.position, Quaternion.identity);
