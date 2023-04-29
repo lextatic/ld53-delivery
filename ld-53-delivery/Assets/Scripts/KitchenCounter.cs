@@ -72,7 +72,7 @@ public class KitchenCounter : MonoBehaviour
 		{
 			UpdateIndicator();
 
-			if (_droneIsAtCounter && Drone.IsSleeping())
+			if (_droneIsAtCounter && Drone.IsSleeping() && Vector3.Angle(Drone.transform.up, Vector3.up) <= 15f)
 			{
 				Debug.Log("At counter!!");
 
@@ -192,6 +192,8 @@ public class KitchenCounter : MonoBehaviour
 			return;
 		}
 
+		SaveCheckpoint();
+
 		var mission = Missions[_currentMissionIndex];
 
 		switch (mission.MissionType)
@@ -205,5 +207,46 @@ public class KitchenCounter : MonoBehaviour
 				_currentMissionIndex++;
 				break;
 		}
+	}
+
+	private Vector3 _savedPosition;
+	private int _savedScore;
+	private int _savedMissionIndex;
+
+	private void SaveCheckpoint()
+	{
+		_savedPosition = Drone.position;
+		_savedMissionIndex = _currentMissionIndex;
+	}
+
+	public void LoadCheckpoint()
+	{
+		_currentMissionIndex = _savedMissionIndex;
+
+		HasPendingOrder = false;
+		HasActiveDishes = false;
+		_droneIsAtCounter = false;
+		_counterCollider.enabled = false;
+
+		foreach (var item in _droneContainer.DeliverableList)
+		{
+			Destroy(item.gameObject);
+		}
+
+		_droneContainer.DeliverableList.Clear();
+
+		foreach (var table in Tables)
+		{
+			table.Reset();
+		}
+
+		Drone.velocity = Vector2.zero;
+		Drone.angularVelocity = 0;
+		Drone.isKinematic = true;
+		Drone.position = _savedPosition;
+		Drone.rotation = 0;
+		Drone.isKinematic = false;
+
+		NewMission();
 	}
 }

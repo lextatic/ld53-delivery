@@ -12,6 +12,7 @@ public class Controller : MonoBehaviour
 	private GameActions _gameActions;
 	private InputAction _leftThrottleAction;
 	private InputAction _rightThrottleAction;
+	private InputAction _restartAction;
 
 	private Rigidbody2D _myRigidBody;
 
@@ -26,18 +27,28 @@ public class Controller : MonoBehaviour
 
 		_leftThrottleAction = _gameActions.PlayerMovement.LeftThrottle;
 		_rightThrottleAction = _gameActions.PlayerMovement.RightThrottle;
+		_restartAction = _gameActions.UI.Restart;
 	}
 
 	private void OnEnable()
 	{
 		_leftThrottleAction.Enable();
 		_rightThrottleAction.Enable();
+		_restartAction.Enable();
+
+		_restartAction.performed += RestartAction_Performed;
+	}
+
+	private void RestartAction_Performed(InputAction.CallbackContext obj)
+	{
+		FindObjectOfType<KitchenCounter>().LoadCheckpoint();
 	}
 
 	private void OnDisable()
 	{
 		_leftThrottleAction.Disable();
 		_rightThrottleAction.Disable();
+		_restartAction.Disable();
 	}
 
 	private void Update()

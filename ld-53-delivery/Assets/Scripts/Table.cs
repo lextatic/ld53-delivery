@@ -55,7 +55,7 @@ public class Table : MonoBehaviour
 		{
 			UpdateIndicator();
 
-			if (_droneIsAtTable && Drone.IsSleeping())
+			if (_droneIsAtTable && Drone.IsSleeping() && Vector3.Angle(Drone.transform.up, Vector3.up) <= 15f)
 			{
 				Debug.Log("At table!!");
 
@@ -148,5 +148,16 @@ public class Table : MonoBehaviour
 		{
 			VisualIndicator.transform.position = transform.position;
 		}
+	}
+
+	public void Reset()
+	{
+		_droneIsAtTable = false;
+		_tableCollider.enabled = false;
+		HasActiveOrder = false;
+		HasPendingDishes = false;
+
+		OnOrderDelivered = null;
+		OnDishesCollected = null;
 	}
 }
