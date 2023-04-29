@@ -1,22 +1,35 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum MissionType
+{
+	Order,
+	Dishes
+}
+
+[Serializable]
+public struct Mission
+{
+	public int TableID;
+	public MissionType MissionType;
+	public GameObject DeliverableComboPrefab;
+}
 
 public class KitchenCounter : MonoBehaviour
 {
 	public Rigidbody2D Drone;
-
-	// Trocar por dados, ScriptableObject provavelmente.
-	public GameObject DeliverablePrefab;
+	public Transform VisualIndicator;
 
 	public List<Table> Tables;
-
-	public Transform VisualIndicator;
+	public List<Mission> Missions;
 
 	private bool _droneIsAtCounter;
 	private bool _hasPendingOrder;
 	private bool _hasActiveDishes;
 	private Collider2D _counterCollider;
 	private DroneContainer _droneContainer;
+	private int _currentMissionIndex;
 
 	public bool HasPendingOrder
 	{
@@ -42,13 +55,15 @@ public class KitchenCounter : MonoBehaviour
 		get => _hasActiveDishes;
 	}
 
-	private void Awake()
+	private void Start()
 	{
 		_droneIsAtCounter = false;
 		_droneContainer = Drone.GetComponent<DroneContainer>();
 		_counterCollider = GetComponent<Collider2D>();
 		_counterCollider.enabled = false;
-		HasPendingOrder = true;
+		_currentMissionIndex = 0;
+
+		NewMission();
 	}
 
 	private void Update()
@@ -63,16 +78,16 @@ public class KitchenCounter : MonoBehaviour
 
 				if (HasPendingOrder && _droneContainer.DeliverableList.Count == 0)
 				{
-					NewOrder();
+					CreateOrder();
 				}
 
 				if (HasActiveDishes && _droneContainer.DeliverableList.Count != 0)
 				{
 					HasActiveDishes = false;
 
-					//var score = CalculateScore();
+					var score = CalculateScoreLoss();
 
-					Debug.Log("dishes delivered");
+					Debug.Log(score);
 
 					foreach (var item in _droneContainer.DeliverableList)
 					{
@@ -81,7 +96,7 @@ public class KitchenCounter : MonoBehaviour
 
 					_droneContainer.DeliverableList.Clear();
 
-					HasPendingOrder = true;
+					NewMission();
 				}
 			}
 		}
@@ -103,15 +118,16 @@ public class KitchenCounter : MonoBehaviour
 		}
 	}
 
-	private void NewOrder()
+	private void CreateOrder()
 	{
-		int table = Random.Range(0, Tables.Count);
+		var mission = Missions[_currentMissionIndex];
 
-		Tables[table].HasActiveOrder = true;
-		Tables[table].OnOrderDelivered += KitchenCounter_OnOrderDelivered;
+		Tables[mission.TableID].HasActiveOrder = true;
+		Tables[mission.TableID].OnOrderDelivered += KitchenCounter_OnOrderDelivered;
 		HasPendingOrder = false;
+		_currentMissionIndex++;
 
-		var deliverablePrefab = Instantiate(DeliverablePrefab, Drone.transform.position, Quaternion.identity);
+		var deliverablePrefab = Instantiate(mission.DeliverableComboPrefab, Drone.transform.position, Quaternion.identity);
 
 		foreach (Transform child in deliverablePrefab.transform)
 		{
@@ -127,15 +143,13 @@ public class KitchenCounter : MonoBehaviour
 	{
 		table.OnOrderDelivered -= KitchenCounter_OnOrderDelivered;
 
-		NewDishes();
+		NewMission();
 	}
 
-	private void NewDishes()
+	private void NewDishes(int tableID, GameObject deliverableComboPrefab)
 	{
-		int table = Random.Range(0, Tables.Count);
-
-		Tables[table].NewDishes(DeliverablePrefab);
-		Tables[table].OnDishesCollected += KitchenCounter_OnDishesCollected;
+		Tables[tableID].NewDishes(deliverableComboPrefab);
+		Tables[tableID].OnDishesCollected += KitchenCounter_OnDishesCollected;
 	}
 
 	private void KitchenCounter_OnDishesCollected(Table table)
@@ -152,6 +166,44 @@ public class KitchenCounter : MonoBehaviour
 		else
 		{
 			VisualIndicator.transform.position = transform.position;
+		}
+	}
+
+	private int CalculateScoreLoss()
+	{
+		int totalScore = 0;
+
+		foreach (var item in _droneContainer.DeliverableList)
+		{
+			if (!Physics2D.Raycast(item.transform.position, Vector2.down, 5f, 1 << LayerMask.NameToLayer("Score")))
+			{
+				totalScore -= item.GetComponent<DeliverableScore>().Score;
+			}
+		}
+
+		return totalScore;
+	}
+
+	private void NewMission()
+	{
+		if (_currentMissionIndex >= Missions.Count)
+		{
+			Debug.Log("Victory!");
+			return;
+		}
+
+		var mission = Missions[_currentMissionIndex];
+
+		switch (mission.MissionType)
+		{
+			case MissionType.Order:
+				HasPendingOrder = true;
+				break;
+
+			case MissionType.Dishes:
+				NewDishes(mission.TableID, mission.DeliverableComboPrefab);
+				_currentMissionIndex++;
+				break;
 		}
 	}
 }

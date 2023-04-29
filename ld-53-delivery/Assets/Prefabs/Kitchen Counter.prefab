@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Drone: {fileID: 0}
-  DeliverablePrefab: {fileID: 8176438228982686952, guid: 5b7b981d33a46524eb0307587e8874d3, type: 3}
+  VisualIndicator: {fileID: 5302484594184039364}
   Tables:
   - {fileID: 0}
   - {fileID: 0}
@@ -103,7 +103,25 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  VisualIndicator: {fileID: 5302484594184039364}
+  Missions:
+  - TableID: 0
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 8c3b6038f0f9be247aa48fa4e8c98e8f, type: 3}
+  - TableID: 2
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 8c3b6038f0f9be247aa48fa4e8c98e8f, type: 3}
+  - TableID: 1
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 66c48769a27c7aa48b55ec9ee44428dc, type: 3}
+  - TableID: 4
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 5b7b981d33a46524eb0307587e8874d3, type: 3}
+  - TableID: 2
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 66c48769a27c7aa48b55ec9ee44428dc, type: 3}
+  - TableID: 1
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 66c48769a27c7aa48b55ec9ee44428dc, type: 3}
 --- !u!1 &7411033260918931601
 GameObject:
   m_ObjectHideFlags: 0
