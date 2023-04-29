@@ -7,12 +7,16 @@ public class Controller : MonoBehaviour
 	public Transform RightMotor;
 	public float MotorForce;
 
-	private GameActions _gameActions;
+	public AnimationCurve ThrottleControlCurve;
 
+	private GameActions _gameActions;
 	private InputAction _leftThrottleAction;
 	private InputAction _rightThrottleAction;
 
 	private Rigidbody2D _myRigidBody;
+
+	public float LeftThrottle { get; private set; }
+	public float RightThrottle { get; private set; }
 
 	private void Awake()
 	{
@@ -36,9 +40,18 @@ public class Controller : MonoBehaviour
 		_rightThrottleAction.Disable();
 	}
 
+	private void Update()
+	{
+		LeftThrottle = _leftThrottleAction.ReadValue<float>();
+		RightThrottle = _rightThrottleAction.ReadValue<float>();
+	}
+
 	private void FixedUpdate()
 	{
-		_myRigidBody.AddForceAtPosition(_leftThrottleAction.ReadValue<float>() * transform.up * MotorForce, LeftMotor.position, ForceMode2D.Force);
-		_myRigidBody.AddForceAtPosition(_rightThrottleAction.ReadValue<float>() * transform.up * MotorForce, RightMotor.position, ForceMode2D.Force);
+		var adjustedLeftThrottle = ThrottleControlCurve.Evaluate(LeftThrottle);
+		var adjustedRightThrottle = ThrottleControlCurve.Evaluate(RightThrottle);
+
+		_myRigidBody.AddForceAtPosition(adjustedLeftThrottle * transform.up * MotorForce, LeftMotor.position, ForceMode2D.Force);
+		_myRigidBody.AddForceAtPosition(adjustedRightThrottle * transform.up * MotorForce, RightMotor.position, ForceMode2D.Force);
 	}
 }
