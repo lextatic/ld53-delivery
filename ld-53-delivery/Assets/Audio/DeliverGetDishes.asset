@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec68e4efda0c25140a49a2cd317090d5, type: 3}
+  m_Name: DeliverGetDishes
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 7670c7f2f0ca47f4b8cbc0afb20dbb1e, type: 3}
+  volume:
+    minValue: 0.8
+    maxValue: 1.2
+  pitch:
+    minValue: 0.8
+    maxValue: 1.2

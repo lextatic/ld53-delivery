@@ -8,6 +8,10 @@ public class Table : MonoBehaviour
 	public Transform VisualIndicator;
 	public Score Score;
 
+	public AudioSource MainAudioSource;
+	public SimpleAudioEvent CashInAudio;
+	public SimpleAudioEvent GetDishesAudio;
+
 	private bool _droneIsAtTable;
 	private DroneContainer _droneContainer;
 	private Collider2D _tableCollider;
@@ -63,7 +67,14 @@ public class Table : MonoBehaviour
 			{
 				if (HasActiveOrder && _droneContainer.DeliverableList.Count != 0)
 				{
-					Score.CurrentScore += CalculateScore();
+					var score = CalculateScore();
+
+					Score.CurrentScore += score;
+
+					if (score > 0)
+					{
+						CashInAudio.Play(MainAudioSource);
+					}
 
 					HasActiveOrder = false;
 
@@ -91,6 +102,8 @@ public class Table : MonoBehaviour
 					dishesPrefab.transform.DetachChildren();
 
 					Destroy(dishesPrefab);
+
+					GetDishesAudio.Play(MainAudioSource);
 
 					OnDishesCollected.Invoke(this);
 				}

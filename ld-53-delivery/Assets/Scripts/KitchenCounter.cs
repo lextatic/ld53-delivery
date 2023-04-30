@@ -26,6 +26,9 @@ public class KitchenCounter : MonoBehaviour
 
 	public Score Score;
 
+	public AudioSource MainAudioSource;
+	public SimpleAudioEvent GetDishesAudio;
+
 	private bool _droneIsAtCounter;
 	private bool _hasPendingOrder;
 	private bool _hasActiveDishes;
@@ -97,6 +100,8 @@ public class KitchenCounter : MonoBehaviour
 
 					_droneContainer.DeliverableList.Clear();
 
+					GetDishesAudio.Play(MainAudioSource);
+
 					NewMission();
 				}
 			}
@@ -136,6 +141,8 @@ public class KitchenCounter : MonoBehaviour
 		}
 
 		deliverablePrefab.transform.DetachChildren();
+
+		GetDishesAudio.Play(MainAudioSource);
 
 		Destroy(deliverablePrefab);
 	}
