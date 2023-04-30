@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6831387704960924985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.5, y: -4.5, z: 0}
-  m_LocalScale: {x: 15, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5302484594184039364}
@@ -103,6 +103,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Missions:
   - TableID: 0
     MissionType: 0
@@ -122,6 +127,7 @@ MonoBehaviour:
   - TableID: 1
     MissionType: 1
     DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 66c48769a27c7aa48b55ec9ee44428dc, type: 3}
+  Score: {fileID: 11400000, guid: bf7e3a25137bcb24f9c45aa85f250170, type: 2}
 --- !u!1 &7411033260918931601
 GameObject:
   m_ObjectHideFlags: 0
