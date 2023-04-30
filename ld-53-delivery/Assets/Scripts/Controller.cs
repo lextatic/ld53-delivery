@@ -23,7 +23,9 @@ public class Controller : MonoBehaviour
 
 	public AudioSource AudioSourceLeft;
 	public AudioSource AudioSourceRight;
-	//public AudioClip ThrottleSound;
+
+	public ParticleSystem ParticleSystemLeft;
+	public ParticleSystem ParticleSystemRight;
 
 	private GameActions _gameActions;
 	private InputAction _leftThrottleAction;
@@ -197,6 +199,9 @@ public class Controller : MonoBehaviour
 		AudioSourceLeft.pitch = 0.8f + (LeftThrottle * 0.4f);
 		// 0.8 - 1.2
 		AudioSourceRight.pitch = 0.8f + (RightThrottle * 0.4f);
+
+		ParticleSystemLeft.startSpeed = 1 + (10 * LeftThrottle);
+		ParticleSystemRight.startSpeed = 1 + (10 * RightThrottle);
 	}
 
 	private void FixedUpdate()
