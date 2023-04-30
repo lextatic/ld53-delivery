@@ -188,7 +188,7 @@ public class KitchenCounter : MonoBehaviour
 	{
 		if (_currentMissionIndex >= Missions.Count)
 		{
-			Debug.Log("Victory!");
+			Drone.GetComponent<Controller>().ShowVictoryPanel();
 			return;
 		}
 

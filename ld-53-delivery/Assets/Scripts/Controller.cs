@@ -11,11 +11,13 @@ public class Controller : MonoBehaviour
 
 	public GameObject MenuPanel;
 	public GameObject ModalPanel;
+	public GameObject VictorylPanel;
 	public Button PauseButton;
 	public Button ResumeButton;
 	public Button RestartButton;
 	public Button QuitButton;
 	public Button YesButton;
+	public Button PlayAgainButton;
 
 	public AnimationCurve ThrottleControlCurve;
 
@@ -120,6 +122,31 @@ public class Controller : MonoBehaviour
 		_sceneToLoad = "MainMenu";
 
 		ShowModal();
+	}
+
+	public void ShowVictoryPanel()
+	{
+		VictorylPanel.SetActive(true);
+		Time.timeScale = 0f;
+
+		PauseButton.enabled = false;
+
+		if (Input.GetJoystickNames().Length > 0)
+		{
+			PlayAgainButton.Select();
+		}
+	}
+
+	public void PlayAgain()
+	{
+		SceneManager.LoadScene("GameScene");
+		Time.timeScale = 1f;
+	}
+
+	public void VictoryQuit()
+	{
+		SceneManager.LoadScene("MainMenu");
+		Time.timeScale = 1f;
 	}
 
 	private void ShowModal()

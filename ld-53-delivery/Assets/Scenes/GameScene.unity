@@ -206,6 +206,14 @@ PrefabInstance:
       propertyPath: RestartButton
       value: 
       objectReference: {fileID: 232568193}
+    - target: {fileID: 3277784833215325911, guid: cebd53314336de741aafdd6a2189869a, type: 3}
+      propertyPath: VictorylPanel
+      value: 
+      objectReference: {fileID: 883829822}
+    - target: {fileID: 3277784833215325911, guid: cebd53314336de741aafdd6a2189869a, type: 3}
+      propertyPath: PlayAgainButton
+      value: 
+      objectReference: {fileID: 674544946}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cebd53314336de741aafdd6a2189869a, type: 3}
 --- !u!1 &20114923
@@ -1103,7 +1111,7 @@ GameObject:
   - component: {fileID: 235391952}
   - component: {fileID: 235391951}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: MenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1173,7 +1181,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 235391952}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 251281547}
+        m_TargetAssemblyTypeName: Controller, Assembly-CSharp
+        m_MethodName: VictoryQuit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &235391952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,7 +1813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Replay
+  m_text: Quit to Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2017,7 +2037,7 @@ GameObject:
   - component: {fileID: 674544947}
   - component: {fileID: 674544946}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PlayAgainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2087,7 +2107,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 674544947}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 251281547}
+        m_TargetAssemblyTypeName: Controller, Assembly-CSharp
+        m_MethodName: PlayAgain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &674544947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2206,7 +2238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu
+  m_text: Play Again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2295,7 +2327,7 @@ GameObject:
   - component: {fileID: 883829825}
   - component: {fileID: 883829824}
   m_Layer: 5
-  m_Name: Game Over
+  m_Name: Victory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
