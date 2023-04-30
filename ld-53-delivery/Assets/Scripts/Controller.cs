@@ -200,8 +200,10 @@ public class Controller : MonoBehaviour
 		// 0.8 - 1.2
 		AudioSourceRight.pitch = 0.8f + (RightThrottle * 0.4f);
 
-		ParticleSystemLeft.startSpeed = 1 + (10 * LeftThrottle);
-		ParticleSystemRight.startSpeed = 1 + (10 * RightThrottle);
+		var main = ParticleSystemLeft.main;
+		main.startSpeed = 1 + (10 * LeftThrottle);
+		main = ParticleSystemRight.main;
+		main.startSpeed = 1 + (10 * RightThrottle);
 	}
 
 	private void FixedUpdate()

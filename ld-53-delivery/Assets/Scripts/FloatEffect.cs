@@ -6,15 +6,15 @@ public class FloatEffect : MonoBehaviour
 	public float Frequency = 1f;
 	public float Delay = 0f;
 
-	private Vector3 startPos;
+	private Vector3 _startPosition;
 
 	private void Start()
 	{
-		startPos = transform.position;
+		_startPosition = transform.position;
 	}
 
 	private void Update()
 	{
-		transform.position = startPos + Vector3.up * Mathf.Sin(Time.time + Delay * Frequency) * Amplitude;
+		transform.position = _startPosition + (Vector3.up * Mathf.Sin(Time.time + (Delay * Frequency)) * Amplitude);
 	}
 }
