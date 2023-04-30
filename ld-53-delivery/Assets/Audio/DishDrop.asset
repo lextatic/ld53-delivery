@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec68e4efda0c25140a49a2cd317090d5, type: 3}
+  m_Name: DishDrop
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 429028532cd501a4fbb01279d3432a0b, type: 3}
+  - {fileID: 8300000, guid: 27b6206a84e2871409df3605cae77a49, type: 3}
+  - {fileID: 8300000, guid: e334dcfededc865449714dfafddbf17f, type: 3}
+  - {fileID: 8300000, guid: 778c809a6ea504a489a2a797f2a386c7, type: 3}
+  volume:
+    minValue: 0.8
+    maxValue: 1.2
+  pitch:
+    minValue: 0.8
+    maxValue: 1.2

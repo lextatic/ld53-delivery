@@ -21,7 +21,7 @@ public class PlayAudioOnHit : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (_audioSource != null && collision.relativeVelocity.magnitude > 0.1f && _cooldownTimer <= 0)
+		if (_audioSource != null && collision.relativeVelocity.magnitude > 5f && _cooldownTimer <= 0.5)
 		{
 			AudioEvent.Play(_audioSource);
 			_cooldownTimer = Cooldown;
