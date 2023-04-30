@@ -6,6 +6,7 @@ public class Table : MonoBehaviour
 	public int TableID;
 	public Rigidbody2D Drone;
 	public Transform VisualIndicator;
+	public Score Score;
 
 	private bool _droneIsAtTable;
 	private DroneContainer _droneContainer;
@@ -57,15 +58,11 @@ public class Table : MonoBehaviour
 
 			if (_droneIsAtTable && Drone.IsSleeping() && Vector3.Angle(Drone.transform.up, Vector3.up) <= 15f)
 			{
-				Debug.Log("At table!!");
-
 				if (HasActiveOrder && _droneContainer.DeliverableList.Count != 0)
 				{
 					HasActiveOrder = false;
 
-					var score = CalculateScore();
-
-					Debug.Log(score);
+					Score.CurrentScore += CalculateScore();
 
 					foreach (var item in _droneContainer.DeliverableList)
 					{

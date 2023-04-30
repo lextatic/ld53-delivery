@@ -24,6 +24,8 @@ public class KitchenCounter : MonoBehaviour
 	public List<Table> Tables;
 	public List<Mission> Missions;
 
+	public Score Score;
+
 	private bool _droneIsAtCounter;
 	private bool _hasPendingOrder;
 	private bool _hasActiveDishes;
@@ -74,8 +76,6 @@ public class KitchenCounter : MonoBehaviour
 
 			if (_droneIsAtCounter && Drone.IsSleeping() && Vector3.Angle(Drone.transform.up, Vector3.up) <= 15f)
 			{
-				Debug.Log("At counter!!");
-
 				if (HasPendingOrder && _droneContainer.DeliverableList.Count == 0)
 				{
 					CreateOrder();
@@ -85,9 +85,7 @@ public class KitchenCounter : MonoBehaviour
 				{
 					HasActiveDishes = false;
 
-					var score = CalculateScoreLoss();
-
-					Debug.Log(score);
+					Score.CurrentScore += CalculateScoreLoss();
 
 					foreach (var item in _droneContainer.DeliverableList)
 					{
