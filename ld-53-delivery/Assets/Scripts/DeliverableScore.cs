@@ -1,4 +1,3 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -26,16 +25,14 @@ public class DeliverableScore : MonoBehaviour
 
 		var scorePrefab = Instantiate(ScoreTextPrefab, transform.position, Quaternion.identity);
 
-		scorePrefab.text = _score.ToString();
-
-		if (_score < 0)
+		if (_score >= 0)
 		{
-			scorePrefab.color = Color.red;
-			scorePrefab.text.Append('-');
+			scorePrefab.text = $"+{_score}";
 		}
 		else
 		{
-			scorePrefab.text.Append('+');
+			scorePrefab.color = Color.red;
+			scorePrefab.text = $"{_score}";
 		}
 	}
 }
