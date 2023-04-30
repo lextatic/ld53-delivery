@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6831387704960924986}
   - component: {fileID: 6831387704960924987}
   - component: {fileID: 6831387704960924984}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Kitchen Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,23 +111,67 @@ MonoBehaviour:
   Missions:
   - TableID: 0
     MissionType: 0
-    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 5b7b981d33a46524eb0307587e8874d3, type: 3}
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 8c3b6038f0f9be247aa48fa4e8c98e8f, type: 3}
   - TableID: 2
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 5b7b981d33a46524eb0307587e8874d3, type: 3}
+  - TableID: 1
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: a5b35587ddc7c0e45b0a91ad05a3a4b3, type: 3}
+  - TableID: 5
     MissionType: 0
     DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 8c3b6038f0f9be247aa48fa4e8c98e8f, type: 3}
-  - TableID: 1
-    MissionType: 1
-    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 66c48769a27c7aa48b55ec9ee44428dc, type: 3}
-  - TableID: 4
-    MissionType: 0
-    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 5b7b981d33a46524eb0307587e8874d3, type: 3}
   - TableID: 2
     MissionType: 1
     DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 66c48769a27c7aa48b55ec9ee44428dc, type: 3}
+  - TableID: 3
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 1a87632725b674a43b929a677c5df328, type: 3}
+  - TableID: 4
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 6b51fc6ca2e2b9d4a9e4bec68e182abc, type: 3}
+  - TableID: 9
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: a194486f63641754084a5b4779d35a3f, type: 3}
+  - TableID: 8
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: c2bc779fed1106c44835c577bbf743a8, type: 3}
+  - TableID: 6
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: f884d3ae4e194ea48859f77dadc1601f, type: 3}
   - TableID: 1
     MissionType: 1
-    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 66c48769a27c7aa48b55ec9ee44428dc, type: 3}
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: c1153a63b4f02b54894b98c5b8e3882a, type: 3}
+  - TableID: 2
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: c79964cc9c33eb3469dff188bd4398cf, type: 3}
+  - TableID: 8
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 275620aa1034b134b9e2a74a9fbce944, type: 3}
+  - TableID: 7
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: a4c1ae0f44147a34a8bda3b9cba6f860, type: 3}
+  - TableID: 5
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: da6da66926716f942afe9fcc81765422, type: 3}
+  - TableID: 6
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: c2bc779fed1106c44835c577bbf743a8, type: 3}
+  - TableID: 10
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 2cca13ac7294d694a8a1b51ef982f0d1, type: 3}
+  - TableID: 3
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: a4c1ae0f44147a34a8bda3b9cba6f860, type: 3}
+  - TableID: 7
+    MissionType: 0
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 89798dbb47ab6f042b9f88a4291299ab, type: 3}
+  - TableID: 10
+    MissionType: 1
+    DeliverableComboPrefab: {fileID: 8176438228982686952, guid: 2cb69fd802cd7884fb7987948d24a9b8, type: 3}
   Score: {fileID: 11400000, guid: bf7e3a25137bcb24f9c45aa85f250170, type: 2}
+  MainAudioSource: {fileID: 0}
+  GetDishesAudio: {fileID: 11400000, guid: ebc83f8af3607d04599f3e259f94929e, type: 2}
 --- !u!1 &7099460749169140187
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3422266390756690346}
   - component: {fileID: 6005252264060781141}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5302484594184039364}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

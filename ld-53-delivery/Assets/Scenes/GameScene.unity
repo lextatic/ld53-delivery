@@ -2044,10 +2044,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 251281545}
     - target: {fileID: 6831387704960924984, guid: 2765c3989c1d237428714bda340a3682, type: 3}
-      propertyPath: GetDishesAudio
-      value: 
-      objectReference: {fileID: 11400000, guid: ebc83f8af3607d04599f3e259f94929e, type: 2}
-    - target: {fileID: 6831387704960924984, guid: 2765c3989c1d237428714bda340a3682, type: 3}
       propertyPath: MainAudioSource
       value: 
       objectReference: {fileID: 519420034}
@@ -2099,14 +2095,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kitchen Counter
       objectReference: {fileID: 0}
-    - target: {fileID: 6831387704960924985, guid: 2765c3989c1d237428714bda340a3682, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6831387704960924985, guid: 2765c3989c1d237428714bda340a3682, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6831387704960924989, guid: 2765c3989c1d237428714bda340a3682, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2150,14 +2138,6 @@ PrefabInstance:
     - target: {fileID: 6831387704960924989, guid: 2765c3989c1d237428714bda340a3682, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7099460749169140187, guid: 2765c3989c1d237428714bda340a3682, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7411033260918931601, guid: 2765c3989c1d237428714bda340a3682, type: 3}
-      propertyPath: m_Layer
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2765c3989c1d237428714bda340a3682, type: 3}

@@ -571,13 +571,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Drone Diner Dash
-
-    Flying Feast
-
-    Drone Delight
-
-    Tabletop Flyer'
+  m_text: Drone Diner Dash
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 927d32ac43818ba469740394508bf9ba, type: 2}
   m_sharedMaterial: {fileID: -8946987530640112319, guid: 927d32ac43818ba469740394508bf9ba, type: 2}
