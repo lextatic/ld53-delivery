@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3674708157174809432}
   - component: {fileID: 3674708157174809435}
   - component: {fileID: -3575209606743429503}
+  - component: {fileID: -4372342626013222753}
   m_Layer: 0
   m_Name: Deliverable
   m_TagString: Untagged
@@ -147,3 +148,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 5
+  ScoreTextPrefab: {fileID: 5936768631200247156, guid: 2aa8ba4adc806c64eb44604830721932, type: 3}
+--- !u!114 &-4372342626013222753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674708157174809434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2106487dc852cbe47a45321a291cf01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ammount: 0.1

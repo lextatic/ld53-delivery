@@ -91,9 +91,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4372342626013222753, guid: a02aae097fe4a804d843b1dbae9094b7, type: 3}
+      propertyPath: Ammount
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: -3575209606743429503, guid: a02aae097fe4a804d843b1dbae9094b7, type: 3}
       propertyPath: Score
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3575209606743429503, guid: a02aae097fe4a804d843b1dbae9094b7, type: 3}
+      propertyPath: _score
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3674708157174809434, guid: a02aae097fe4a804d843b1dbae9094b7, type: 3}
       propertyPath: m_Name

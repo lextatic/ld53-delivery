@@ -48,6 +48,8 @@ public class Table : MonoBehaviour
 		_droneContainer = Drone.GetComponent<DroneContainer>();
 		_tableCollider = GetComponent<Collider2D>();
 		_tableCollider.enabled = false;
+
+		VisualIndicator.transform.parent = null;
 	}
 
 	private void Update()
@@ -60,9 +62,9 @@ public class Table : MonoBehaviour
 			{
 				if (HasActiveOrder && _droneContainer.DeliverableList.Count != 0)
 				{
-					HasActiveOrder = false;
-
 					Score.CurrentScore += CalculateScore();
+
+					HasActiveOrder = false;
 
 					foreach (var item in _droneContainer.DeliverableList)
 					{
@@ -123,11 +125,11 @@ public class Table : MonoBehaviour
 
 		foreach (var item in _droneContainer.DeliverableList)
 		{
-			if (Physics2D.Raycast(item.transform.position, Vector2.down, 5f, 1 << LayerMask.NameToLayer("Score")))
+			if (Physics2D.Raycast(item.transform.position + (Vector3.up * 0.5f), Vector2.down, 5.5f, 1 << LayerMask.NameToLayer("Score")))
 			{
 				if (Vector3.Angle(item.transform.up, Vector3.up) <= 15f)
 				{
-					totalScore += item.GetComponent<DeliverableScore>().Score;
+					totalScore += item.GetComponent<DeliverableScore>().ReadScore();
 				}
 			}
 		}
@@ -137,14 +139,26 @@ public class Table : MonoBehaviour
 
 	private void UpdateIndicator()
 	{
-		if (Vector3.Distance(Drone.transform.position, transform.position) > 20)
+		Vector3 objectPosition = transform.position;
+		Vector3 screenPosition = Camera.main.WorldToScreenPoint(objectPosition);
+
+		var visualIndicatorPosition = objectPosition;
+		var visualIndicatorRotation = transform.rotation;
+
+		if (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height)
 		{
-			VisualIndicator.transform.position = Drone.transform.position + (transform.position - Drone.transform.position).normalized * 20;
+			Vector3 cameraToObjectDirection = (objectPosition - Drone.transform.position).normalized;
+			Vector3 edgePosition = Drone.transform.position + (cameraToObjectDirection * 20);
+			Vector3 edgeScreenPosition = Camera.main.WorldToScreenPoint(edgePosition);
+			visualIndicatorPosition = Camera.main.ScreenToWorldPoint(edgeScreenPosition);
+
+			Vector3 direction = (visualIndicatorPosition - objectPosition).normalized;
+			float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) - 90f;
+			visualIndicatorRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 		}
-		else
-		{
-			VisualIndicator.transform.position = transform.position;
-		}
+
+		VisualIndicator.transform.position = Vector3.Lerp(VisualIndicator.transform.position, visualIndicatorPosition, 2 * Time.deltaTime);
+		VisualIndicator.transform.rotation = Quaternion.Lerp(VisualIndicator.transform.rotation, visualIndicatorRotation, 2 * Time.deltaTime);
 	}
 
 	public void Reset()
