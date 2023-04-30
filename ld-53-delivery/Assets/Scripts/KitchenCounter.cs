@@ -76,7 +76,8 @@ public class KitchenCounter : MonoBehaviour
 		{
 			UpdateIndicator();
 
-			if (_droneIsAtCounter && Drone.IsSleeping() && Vector3.Angle(Drone.transform.up, Vector3.up) <= 15f)
+			if (_droneIsAtCounter && (Drone.IsSleeping() || (Drone.velocity.sqrMagnitude < 0.1f && Drone.angularVelocity < 0.1f))
+				&& Vector3.Angle(Drone.transform.up, Vector3.up) <= 15f)
 			{
 				if (HasPendingOrder && _droneContainer.DeliverableList.Count == 0)
 				{

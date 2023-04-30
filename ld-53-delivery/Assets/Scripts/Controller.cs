@@ -21,6 +21,10 @@ public class Controller : MonoBehaviour
 
 	public AnimationCurve ThrottleControlCurve;
 
+	public AudioSource AudioSourceLeft;
+	public AudioSource AudioSourceRight;
+	//public AudioClip ThrottleSound;
+
 	private GameActions _gameActions;
 	private InputAction _leftThrottleAction;
 	private InputAction _rightThrottleAction;
@@ -183,6 +187,16 @@ public class Controller : MonoBehaviour
 	{
 		LeftThrottle = _leftThrottleAction.ReadValue<float>();
 		RightThrottle = _rightThrottleAction.ReadValue<float>();
+
+		//AudioSource.volume = (LeftThrottle + RightThrottle) > 0 ? 1f : 0f;
+
+		//// 0.8 - 1.4
+		//AudioSource.pitch = 0.8f + ((LeftThrottle + RightThrottle) / 2f) * 0.6f;
+
+		// 0.8 - 1.2
+		AudioSourceLeft.pitch = 0.8f + (LeftThrottle * 0.4f);
+		// 0.8 - 1.2
+		AudioSourceRight.pitch = 0.8f + (RightThrottle * 0.4f);
 	}
 
 	private void FixedUpdate()
