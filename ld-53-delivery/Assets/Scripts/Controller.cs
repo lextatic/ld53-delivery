@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -7,14 +9,25 @@ public class Controller : MonoBehaviour
 	public Transform RightMotor;
 	public float MotorForce;
 
+	public GameObject MenuPanel;
+	public GameObject ModalPanel;
+	public Button PauseButton;
+	public Button ResumeButton;
+	public Button RestartButton;
+	public Button QuitButton;
+	public Button YesButton;
+
 	public AnimationCurve ThrottleControlCurve;
 
 	private GameActions _gameActions;
 	private InputAction _leftThrottleAction;
 	private InputAction _rightThrottleAction;
-	private InputAction _restartAction;
+	private InputAction _retryAction;
+	private InputAction _menuAction;
 
 	private Rigidbody2D _myRigidBody;
+
+	private string _sceneToLoad;
 
 	public float LeftThrottle { get; private set; }
 	public float RightThrottle { get; private set; }
@@ -27,16 +40,100 @@ public class Controller : MonoBehaviour
 
 		_leftThrottleAction = _gameActions.PlayerMovement.LeftThrottle;
 		_rightThrottleAction = _gameActions.PlayerMovement.RightThrottle;
-		_restartAction = _gameActions.UI.Restart;
+		_retryAction = _gameActions.UI.Retry;
+		_menuAction = _gameActions.UI.Menu;
 	}
 
 	private void OnEnable()
 	{
 		_leftThrottleAction.Enable();
 		_rightThrottleAction.Enable();
-		_restartAction.Enable();
+		_retryAction.Enable();
+		_menuAction.Enable();
 
-		_restartAction.performed += RestartAction_Performed;
+		_retryAction.performed += RestartAction_Performed;
+		_menuAction.performed += MenuAction_Performed;
+	}
+
+	private void MenuAction_Performed(InputAction.CallbackContext obj)
+	{
+		if (!MenuPanel.activeInHierarchy)
+		{
+			Pause();
+		}
+		else
+		{
+			Resume();
+		}
+	}
+
+	public void Pause()
+	{
+		MenuPanel.SetActive(true);
+		Time.timeScale = 0f;
+
+		PauseButton.enabled = false;
+
+		if (Input.GetJoystickNames().Length > 0)
+		{
+			ResumeButton.Select();
+		}
+	}
+
+	public void Resume()
+	{
+		MenuPanel.SetActive(false);
+		Time.timeScale = 1f;
+
+		PauseButton.enabled = true;
+	}
+
+	public void Restart()
+	{
+		_sceneToLoad = "GameScene";
+
+		ShowModal();
+	}
+
+	public void ConfirmModal()
+	{
+		SceneManager.LoadScene(_sceneToLoad);
+		Time.timeScale = 1f;
+	}
+
+	public void CancelModal()
+	{
+		ModalPanel.SetActive(false);
+
+		ResumeButton.enabled = true;
+		RestartButton.enabled = true;
+		QuitButton.enabled = true;
+
+		if (Input.GetJoystickNames().Length > 0)
+		{
+			ResumeButton.Select();
+		}
+	}
+
+	public void Quit()
+	{
+		_sceneToLoad = "MainMenu";
+
+		ShowModal();
+	}
+
+	private void ShowModal()
+	{
+		ModalPanel.SetActive(true);
+
+		ResumeButton.enabled = false;
+		RestartButton.enabled = false;
+		QuitButton.enabled = false;
+
+		if (Input.GetJoystickNames().Length > 0)
+		{
+			YesButton.Select();
+		}
 	}
 
 	private void RestartAction_Performed(InputAction.CallbackContext obj)
@@ -48,7 +145,11 @@ public class Controller : MonoBehaviour
 	{
 		_leftThrottleAction.Disable();
 		_rightThrottleAction.Disable();
-		_restartAction.Disable();
+		_retryAction.Disable();
+		_menuAction.Enable();
+
+		_retryAction.performed -= RestartAction_Performed;
+		_menuAction.performed -= MenuAction_Performed;
 	}
 
 	private void Update()
