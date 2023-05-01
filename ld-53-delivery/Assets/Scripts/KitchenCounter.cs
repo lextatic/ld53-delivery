@@ -197,7 +197,7 @@ public class KitchenCounter : MonoBehaviour
 		{
 			if (!Physics2D.Raycast(item.transform.position + (Vector3.up * 0.5f), Vector2.down, 5.5f, 1 << LayerMask.NameToLayer("Score")))
 			{
-				totalScore -= item.GetComponent<DeliverableScore>().ReadScore();
+				totalScore += item.GetComponent<DeliverableScore>().ReadScore();
 			}
 		}
 

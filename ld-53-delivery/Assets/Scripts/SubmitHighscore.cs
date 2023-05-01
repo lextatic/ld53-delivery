@@ -21,7 +21,7 @@ public class SubmitHighscore : MonoBehaviour
 		if (!string.IsNullOrEmpty(NicknameInputField.text))
 		{
 			LeaderboardCreator.UploadNewEntry(_leaderboardPublicKey, NicknameInputField.text, _totalScore);
-			SubmitButton.enabled = false;
+			SubmitButton.interactable = false;
 			SubmitButtonText.text = "Done";
 		}
 		else

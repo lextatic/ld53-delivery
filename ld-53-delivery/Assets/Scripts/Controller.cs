@@ -80,7 +80,7 @@ public class Controller : MonoBehaviour
 		MenuPanel.SetActive(true);
 		Time.timeScale = 0f;
 
-		PauseButton.enabled = false;
+		PauseButton.interactable = false;
 
 		if (Input.GetJoystickNames().Length > 0)
 		{
@@ -93,7 +93,7 @@ public class Controller : MonoBehaviour
 		MenuPanel.SetActive(false);
 		Time.timeScale = 1f;
 
-		PauseButton.enabled = true;
+		PauseButton.interactable = true;
 	}
 
 	public void Restart()
@@ -135,7 +135,7 @@ public class Controller : MonoBehaviour
 		VictorylPanel.SetActive(true);
 		Time.timeScale = 0f;
 
-		PauseButton.enabled = false;
+		PauseButton.interactable = false;
 
 		if (Input.GetJoystickNames().Length > 0)
 		{
