@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum MissionType
@@ -28,6 +29,7 @@ public class KitchenCounter : MonoBehaviour
 
 	public AudioSource MainAudioSource;
 	public SimpleAudioEvent GetDishesAudio;
+	public TextMeshProUGUI ProgressLabel;
 
 	private bool _droneIsAtCounter;
 	private bool _hasPendingOrder;
@@ -206,6 +208,8 @@ public class KitchenCounter : MonoBehaviour
 
 	private void NewMission()
 	{
+		ProgressLabel.text = $"<color=#FFB100>Progress:</color> {_currentMissionIndex + 1}/{Missions.Count}";
+
 		if (_currentMissionIndex >= Missions.Count)
 		{
 			Drone.GetComponent<Controller>().ShowVictoryPanel();

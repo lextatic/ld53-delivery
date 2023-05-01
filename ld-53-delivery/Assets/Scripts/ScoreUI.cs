@@ -17,6 +17,6 @@ public class ScoreUI : MonoBehaviour
 
 	private void Update()
 	{
-		ScoreText.text = $"Score: {Score.CurrentScore}";
+		ScoreText.text = $"<color=#FFB100>Score:</color> {Score.CurrentScore}";
 	}
 }

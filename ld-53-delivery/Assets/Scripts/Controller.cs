@@ -18,6 +18,7 @@ public class Controller : MonoBehaviour
 	public Button QuitButton;
 	public Button YesButton;
 	public Button PlayAgainButton;
+	public Toggle SwapControls;
 
 	public AnimationCurve ThrottleControlCurve;
 
@@ -36,6 +37,7 @@ public class Controller : MonoBehaviour
 	private Rigidbody2D _myRigidBody;
 
 	private string _sceneToLoad;
+	private bool _controlsSwapped;
 
 	public float LeftThrottle { get; private set; }
 	public float RightThrottle { get; private set; }
@@ -50,6 +52,10 @@ public class Controller : MonoBehaviour
 		_rightThrottleAction = _gameActions.PlayerMovement.RightThrottle;
 		_retryAction = _gameActions.UI.Retry;
 		_menuAction = _gameActions.UI.Menu;
+		_controlsSwapped = false;
+
+		_controlsSwapped = PlayerPrefs.GetInt("SwapControls", 0) != 0;
+		SwapControls.isOn = _controlsSwapped;
 	}
 
 	private void OnEnable()
@@ -113,9 +119,10 @@ public class Controller : MonoBehaviour
 	{
 		ModalPanel.SetActive(false);
 
-		ResumeButton.enabled = true;
-		RestartButton.enabled = true;
-		QuitButton.enabled = true;
+		ResumeButton.interactable = true;
+		RestartButton.interactable = true;
+		QuitButton.interactable = true;
+		SwapControls.interactable = true;
 
 		if (Input.GetJoystickNames().Length > 0)
 		{
@@ -159,14 +166,21 @@ public class Controller : MonoBehaviour
 	{
 		ModalPanel.SetActive(true);
 
-		ResumeButton.enabled = false;
-		RestartButton.enabled = false;
-		QuitButton.enabled = false;
+		ResumeButton.interactable = false;
+		RestartButton.interactable = false;
+		QuitButton.interactable = false;
+		SwapControls.interactable = false;
 
 		if (Input.GetJoystickNames().Length > 0)
 		{
 			YesButton.Select();
 		}
+	}
+
+	public void OnSwapControls()
+	{
+		_controlsSwapped = SwapControls.isOn;
+		PlayerPrefs.SetInt("SwapControls", _controlsSwapped ? 1 : 0);
 	}
 
 	private void RestartAction_Performed(InputAction.CallbackContext obj)
@@ -190,10 +204,12 @@ public class Controller : MonoBehaviour
 		LeftThrottle = _leftThrottleAction.ReadValue<float>();
 		RightThrottle = _rightThrottleAction.ReadValue<float>();
 
-		//AudioSource.volume = (LeftThrottle + RightThrottle) > 0 ? 1f : 0f;
-
-		//// 0.8 - 1.4
-		//AudioSource.pitch = 0.8f + ((LeftThrottle + RightThrottle) / 2f) * 0.6f;
+		if (_controlsSwapped)
+		{
+			var swapValue = LeftThrottle;
+			LeftThrottle = RightThrottle;
+			RightThrottle = swapValue;
+		}
 
 		// 0.8 - 1.2
 		AudioSourceLeft.pitch = 0.8f + (LeftThrottle * 0.4f);

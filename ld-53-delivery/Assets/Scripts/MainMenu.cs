@@ -1,13 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-	private void Update()
+	public Button StartGameButton;
+
+	private void Start()
 	{
-		if (Input.anyKeyDown)
+		if (Input.GetJoystickNames().Length > 0)
 		{
-			SceneManager.LoadScene("GameScene");
+			StartGameButton.Select();
 		}
+	}
+
+	public void StartGame()
+	{
+		SceneManager.LoadScene("GameScene");
 	}
 }
