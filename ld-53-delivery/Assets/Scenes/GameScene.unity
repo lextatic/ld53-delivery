@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 122802507}
   - component: {fileID: 122802506}
   m_Layer: 5
-  m_Name: MenuButton (1)
+  m_Name: SubmitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3273,6 +3273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreTextLabel: {fileID: 1475651268}
   NicknameInputField: {fileID: 29163690}
+  SubmitButton: {fileID: 122802506}
+  SubmitButtonText: {fileID: 622625376}
   Timer: {fileID: 1901433209}
   Score: {fileID: 11400000, guid: bf7e3a25137bcb24f9c45aa85f250170, type: 2}
 --- !u!1 &919508472

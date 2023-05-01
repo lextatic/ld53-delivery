@@ -1,6 +1,7 @@
 using Dan.Main;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SubmitHighscore : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class SubmitHighscore : MonoBehaviour
 
 	public TextMeshProUGUI ScoreTextLabel;
 	public TMP_InputField NicknameInputField;
+	public Button SubmitButton;
+	public TextMeshProUGUI SubmitButtonText;
 	public Timer Timer;
 	public Score Score;
 
@@ -18,6 +21,8 @@ public class SubmitHighscore : MonoBehaviour
 		if (!string.IsNullOrEmpty(NicknameInputField.text))
 		{
 			LeaderboardCreator.UploadNewEntry(_leaderboardPublicKey, NicknameInputField.text, _totalScore);
+			SubmitButton.enabled = false;
+			SubmitButtonText.text = "Done";
 		}
 		else
 		{
