@@ -13,6 +13,7 @@ public class Controller : MonoBehaviour
 	public GameObject ModalPanel;
 	public GameObject VictorylPanel;
 	public Button PauseButton;
+	public Button RetryButton;
 	public Button ResumeButton;
 	public Button RestartButton;
 	public Button QuitButton;
@@ -56,6 +57,8 @@ public class Controller : MonoBehaviour
 
 		_controlsSwapped = PlayerPrefs.GetInt("SwapControls", 0) != 0;
 		SwapControls.isOn = _controlsSwapped;
+
+		Input.multiTouchEnabled = true;
 	}
 
 	private void OnEnable()
@@ -87,6 +90,7 @@ public class Controller : MonoBehaviour
 		Time.timeScale = 0f;
 
 		PauseButton.interactable = false;
+		RetryButton.interactable = false;
 
 		if (Input.GetJoystickNames().Length > 0)
 		{
@@ -100,6 +104,7 @@ public class Controller : MonoBehaviour
 		Time.timeScale = 1f;
 
 		PauseButton.interactable = true;
+		RetryButton.interactable = true;
 	}
 
 	public void Restart()
@@ -143,6 +148,7 @@ public class Controller : MonoBehaviour
 		Time.timeScale = 0f;
 
 		PauseButton.interactable = false;
+		RetryButton.interactable = false;
 
 		if (Input.GetJoystickNames().Length > 0)
 		{
@@ -185,6 +191,11 @@ public class Controller : MonoBehaviour
 
 	private void RestartAction_Performed(InputAction.CallbackContext obj)
 	{
+		Retry();
+	}
+
+	public void Retry()
+	{
 		FindObjectOfType<KitchenCounter>().LoadCheckpoint();
 	}
 
@@ -203,6 +214,18 @@ public class Controller : MonoBehaviour
 	{
 		LeftThrottle = _leftThrottleAction.ReadValue<float>();
 		RightThrottle = _rightThrottleAction.ReadValue<float>();
+
+		foreach (var touch in Input.touches)
+		{
+			if (touch.position.x < Screen.width / 2)
+			{
+				LeftThrottle = 1;
+			}
+			else if (touch.position.x > Screen.width / 2)
+			{
+				RightThrottle = 1;
+			}
+		}
 
 		if (_controlsSwapped)
 		{
